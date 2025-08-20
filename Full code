@@ -1,0 +1,59 @@
+import matplotlib.pyplot as plt
+
+# National averages
+national_avg_hours = 161.6   # hours per month
+national_wage = 36.44        # $ per hour
+
+# Your averages
+my_avg_hours = 226.5         # hours per month
+my_wage = 26.19              # $ per hour
+
+# Convert to yearly hours
+national_yearly_hours = national_avg_hours * 12
+my_yearly_hours = my_avg_hours * 12
+
+# Yearly income
+national_income = national_yearly_hours * national_wage
+my_income = my_yearly_hours * my_wage
+
+# Differences
+hours_difference = my_yearly_hours - national_yearly_hours
+income_difference = my_income - national_income
+
+# Percentage differences
+percent_hours_diff = (hours_difference / national_yearly_hours) * 100
+percent_income_diff = (income_difference / national_income) * 100
+
+# Print results
+print(f"National yearly hours: {national_yearly_hours:.1f}")
+print(f"My yearly hours: {my_yearly_hours:.1f}")
+print(f"Difference in yearly hours: {hours_difference:.1f} ({percent_hours_diff:.2f}%)\n")
+
+print(f"National yearly income: ${national_income:,.2f}")
+print(f"My yearly income: ${my_income:,.2f}")
+print(f"Difference in yearly income: ${income_difference:,.2f} ({percent_income_diff:.2f}%)\n")
+
+# --- Charts ---
+# Bar chart comparing totals
+categories = ["Yearly Hours", "Yearly Income"]
+national_values = [national_yearly_hours, national_income]
+my_values = [my_yearly_hours, my_income]
+
+x = range(len(categories))
+plt.bar(x, national_values, width=0.4, label="National Average", align='center')
+plt.bar([i + 0.4 for i in x], my_values, width=0.4, label="Me", align='center')
+plt.xticks([i + 0.2 for i in x], categories)
+plt.ylabel("Value")
+plt.title("Comparison: National Average vs Me")
+plt.legend()
+plt.show()
+
+# Percentage difference chart
+categories = ["Hours Worked", "Income Earned"]
+percent_values = [percent_hours_diff, percent_income_diff]
+
+plt.bar(categories, percent_values, color=['steelblue', 'seagreen'])
+plt.axhline(0, color='black', linewidth=0.8, linestyle='--')
+plt.ylabel("Percentage Difference (%)")
+plt.title("My Work & Income vs National Average (%)")
+plt.show()
